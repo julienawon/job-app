@@ -6,7 +6,7 @@ const { RAPID_API_KEY } = '@env'
 
 const rapidapiKey = RAPID_API_KEY;
 
-const useFetch = () => {
+const useFetch = (endpoint, query) => {
     const [data, setData] = useState([]);
     const [isloading, setisLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -16,7 +16,7 @@ const useFetch = () => {
         url: `https://jsearch.p.rapidapi.com/${endpoint}`,
         params: { ...query },
         headers: {
-            'X-RapidAPI-Key': rapidapiKey,
+            'X-RapidAPI-Key': 'bdf6acb187msh5e1efe087f34c34p19dc3fjsnae368f9898d3',
             'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
         }
     };
@@ -47,3 +47,5 @@ const useFetch = () => {
 
     return { data, isloading, error, refetch };
 }
+
+export default useFetch;
