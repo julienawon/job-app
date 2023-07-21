@@ -1,14 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { set } from "react-native-reanimated";
 
-const { RAPID_API_KEY } = '@env'
-
-const rapidapiKey = RAPID_API_KEY;
 
 const useFetch = (endpoint, query) => {
     const [data, setData] = useState([]);
-    const [isloading, setisLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const options = {
@@ -22,17 +18,17 @@ const useFetch = (endpoint, query) => {
     };
     
     const fetchData = async () => {
-        setisLoading(true);
+        setIsLoading(true);
         try {
             const response = await axios.request(options);
-            setData(response.data);
-            setisLoading(false);
+            setData(response.data.data);
+            setIsLoading(false);
         } catch (error) {
             setError(error);
             alert("There was an error fetching data.");
         }
         finally {
-            setisLoading(false);
+            setIsLoading(false);
         }
     }
 
@@ -41,11 +37,11 @@ const useFetch = (endpoint, query) => {
     }, []);
 
     const refetch = () => {
-        setisLoading(true);
+        setIsLoading(true);
         fetchData();
     }
 
-    return { data, isloading, error, refetch };
+    return { data, isLoading, error, refetch };
 }
 
 export default useFetch;
